@@ -11,8 +11,8 @@ void setup() {
   Serial.begin(9600);
   pinMode(5, OUTPUT);
   pinMode(ledPin, OUTPUT);  
-  for (int ii=0;ii<offset_size;ii++){
-    offset += analogRead(A0)-(1023/2);
+  for (int ii = 0; ii < offset_size; ii++){
+    offset += analogRead(A0) - (1023 / 2);
   }
   offset /= offset_size;
 }
@@ -21,16 +21,16 @@ void setup() {
 void loop() {
   float adc_avg = 0; 
   float veloc = 0.0;
-  for (int ii = 0; ii  <veloc_mean_size; ii++){
+  for (int ii = 0; ii < veloc_mean_size; ii++){
     adc_avg += analogRead(A0) - offset;
   }
   adc_avg /= veloc_mean_size;
   if (adc_avg > 512 - zero_span and adc_avg < 512 + zero_span){
   } else{
     if (adc_avg < 512){
-      veloc = -sqrt((-10000.0*((adc_avg / 1023.0) - 0.5)) / rho);
+      veloc = -sqrt((-10000.0 * ((adc_avg / 1023.0) - 0.5)) / rho);
     } else{
-      veloc = sqrt((10000.0*((adc_avg / 1023.0) - 0.5)) / rho);
+      veloc = sqrt((10000.0  *((adc_avg / 1023.0) - 0.5)) / rho);
     }
   }
   if (veloc > 0.00) {
